@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Card</title>
+    <link rel="stylesheet" href="css/fontello.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        h1 {
+            font-size: 14px;
+        }
+
+        main {
+            width: 100%;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+
+            .numbers {
+                position: absolute;
+                top: 10px;
+                left: 10px;
+            }
+
+            >div {
+                width: 500px;
+                height: 300px;
+                background-color: #2a5791;
+                padding: 2%;
+                border-radius: 20px;
+
+                >.numberCard {
+                    display: flex;
+                    width: 100%;
+                    height: 40%;
+                    align-items: center;
+                    gap: 8px;
+
+                    >input {
+                        height: 40%;
+                        border-radius: 10px;
+                        width: 25%;
+                        outline: none;
+                        border: none;
+                        padding: 0px 10px;
+                        font-size: 20px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: #416594;
+                        color: white;
+                        text-align: center;
+
+                    }
+
+                }
+
+                .cvv2 {
+                    width: 100%;
+                    height: 40%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    >input {
+                        height: 40%;
+                        width: 50%;
+                        padding: 0px 10px;
+                        font-size: 20px;
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        background-color: #416594;
+                        color: white;
+                        text-align: center;
+                        outline: none;
+                        border: none;
+                        border-radius: 10px;
+                    }
+                }
+
+                .add {
+                    width: 100%;
+                    height: 20%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+
+                    >button {
+                        background-color: green;
+                        outline: none;
+                        border: none;
+                        padding: 14px 26px;
+                        border-radius: 5px;
+                        color: white;
+                    }
+                }
+            }
+        }
+        footer{
+            width: 100%;
+            height: 20vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            >div{
+
+                height: 100%;
+                width: 50%;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+
+                >h1{
+                    color: #2a5791;
+                    font-family: Arial, "Helvetica Neue", Helvetica, sans-serif;
+                    font-size: 24px;
+                }
+            }
+            >nav{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                height: 100%;
+                width: 50%;
+                >ul{
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: 100%;
+                    height: 100%;
+                    list-style-type: none;
+                    gap: 15px;
+                    >li{
+                        display: flex;
+                        justify-content: center;
+                        align-items: center;
+                        color: #2a5791;
+                        width: fit-content;
+                        height: 40px;
+                        >a{
+                            width: 100%;
+                            height: 100%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            text-decoration: none;
+                            color: #2a5791;
+                            >i{
+                                width: 100%;
+                                height: 100%;
+                                display: flex;
+                                justify-content: center;
+                                align-items: center;
+                                color: #2a5791;
+                                transition: .4s;
+                                padding: 5px;
+                                border-radius: 50%;
+                                font-size: 24px;
+                                &:hover{
+                                    background-color: black;
+                                }
+                            }
+                        }
+                    }
+                }
+            }
+        }
+    </style>
+</head>
+
+<body>
+    <main>
+        <section class="numbers">
+
+        </section>
+        <div>
+            <div class="numberCard">
+                <input type="text">
+                <input type="text">
+                <input type="text">
+                <input type="text">
+            </div>
+            <div class="cvv2">
+                <input type="text" placeholder="CVV2">
+            </div>
+            <div class="add">
+                <button>Add</button>
+            </div>
+        </div>
+    </main>
+    <footer>
+        <div>
+            <h1>Ermia Razavi</h1>
+        </div>
+        <nav>
+            <ul>
+                <li><a href="https://www.linkedin.com/in/ermia-razavi-a611312a3/"><i class="icon-linkedin"></i></a></li>
+                <li><a href="https://github.com/ErmiaRZV"><i class="icon-github-circled"></i></a></li>
+            </ul>
+        </nav>
+    </footer>
+</body>
+
+
+<script>
+    const inputsNumber = document.querySelectorAll('.numberCard>input')
+    const inputCvv2 = document.querySelector('.cvv2>input')
+    const addButton = document.querySelector('.add>button')
+    const numbers = document.querySelector('.numbers')
+    let cardNumber = ''
+    let numberC = ''
+    inputsNumber[0].focus()
+
+
+
+
+    inputCvv2.addEventListener('keyup', (e) => {
+        e.target.value = e.target.value.slice(0, 3)
+        if (e.target.value.length == 0 && e.keyCode == 8) {
+            inputsNumber[3].focus()
+        }
+        if (e.keyCode == 13) {
+            add2h1()
+        }
+    })
+
+    inputsNumber.forEach((val, i) => {
+
+
+        val.addEventListener('keyup', (e) => {
+            if (e.keyCode == 13) {
+                add2h1()
+            }
+            val.value = val.value.slice(0, 4)
+
+
+            if (i != 3) {
+                if (val.value.length >= 4) {
+                    inputsNumber[i + 1].focus()
+
+
+
+
+                }
+            } else {
+                if (val.value.length >= 4) {
+                    inputCvv2.focus()
+
+
+
+
+                }
+            }
+
+            if (i != 0) {
+                if ((e.which == 8 || e.keyCode == 8 || e.key == 'Enter') && val.value.length == 0) {
+
+                    inputsNumber[i - 1].focus()
+                }
+            }
+        })
+    })
+
+
+    addButton.addEventListener('click', () => {
+        add2h1()
+    })
+
+
+    function add2h1() {
+        inputsNumber.forEach((v) => {
+            numberC += v.value
+        })
+
+
+        if (numberC.length == 16 && inputCvv2.value.length == 3) {
+            cardNumber += 'Card number : '
+            inputsNumber.forEach((items, a) => {
+                if (a == 3) {
+                    cardNumber += items.value
+                    items.value = ""
+                } else {
+                    cardNumber += (items.value + '-')
+                    items.value = ""
+                }
+
+            })
+            cardNumber += (' / cvv2 : ' + inputCvv2.value)
+
+            inputCvv2.value = ''
+
+            let h1 = document.createElement('h1')
+            h1.innerHTML = cardNumber
+            numbers.appendChild(h1)
+            cardNumber = ""
+            inputsNumber[0].focus()
+            numberC = ''
+        } else {
+            
+            alert('Wrong card number or cvv2')
+            numberC = ''
+        }
+    }
+</script>
+
+</html>
